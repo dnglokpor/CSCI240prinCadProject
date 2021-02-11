@@ -16,7 +16,6 @@ import javafx.scene.paint.Color;
  */
 class TextGuiSettings implements Settings{
 	// initial shared attributes
-	private final String FILENAME;
 	private int sceneWidth;
 	private int sceneHeight;
 	private String sceneColor;
@@ -36,8 +35,6 @@ class TextGuiSettings implements Settings{
 		this.canvasWidth = Integer.parseInt(DEFAULTS[3]);;
 		this.canvasHeight = Integer.parseInt(DEFAULTS[4]);;
 		this.canvasColor = DEFAULTS[5];
-		// set filename
-		this.FILENAME = PATH_TO_SETTINGS + SETTINGS_FILE_NAME + ".txt";
 	}
 	
 	// getters
@@ -106,6 +103,16 @@ class TextGuiSettings implements Settings{
 		// FILENAME DOESN'T HAVE TO BE CLONED
 	}
 	
+	public String[] listSettings() {
+		String[] data = new String[DEFAULTS.length];
+		data[0] = Integer.toString(this.sceneWidth);
+		data[1] = Integer.toString(this.sceneHeight);
+		data[2] = this.sceneColor;
+		data[3] = Integer.toString(this.canvasWidth);
+		data[4] = Integer.toString(this.canvasHeight);
+		data[5] = this.canvasColor;
+		return data;
+	}
 	/**
 	 * load settings for this instance from the path and text file specified by
 	 * the interface. the text file is expected to be in a certain shape. If 
@@ -125,18 +132,33 @@ class TextGuiSettings implements Settings{
 			Scanner settingsFile = new Scanner(settings);
 			if(settingsFile.hasNext()) { // if file is not empty
 				try { // importing settings.
-					readValues.sceneWidth = 
-						Integer.parseInt(settingsFile.nextLine().split(" ")[2]); // scene width
-					readValues.sceneHeight = 
-						Integer.parseInt(settingsFile.nextLine().split(" ")[2]); // scene height
-					readValues.sceneColor = 
-						settingsFile.nextLine().split(" ")[2]; // scene color
-					readValues.canvasWidth = 
-						Integer.parseInt(settingsFile.nextLine().split(" ")[2]); // canvas width
-					readValues.canvasHeight = 
-						Integer.parseInt(settingsFile.nextLine().split(" ")[2]); // canvas height
-					readValues.canvasColor = 
-						settingsFile.nextLine().split(" ")[2]; // canvas color
+					settingsFile.nextLine(); // skips over
+					settingsFile.nextLine(); // the two comment lines
+					// reading loop
+					String read[]; // buffer
+					for(int i = 0; i < DEFAULTS.length; i++) {
+						read = settingsFile.nextLine().split("=");
+						switch(read[0]) {
+							case "SceneWidth": 
+								readValues.sceneWidth = Integer.parseInt(read[1]);
+								break;
+							case "SceneHeight": 
+								readValues.sceneHeight = Integer.parseInt(read[1]);
+								break;
+							case "SceneColor": 
+								readValues.sceneColor = read[1];
+								break;
+							case "CanvasWidth": 
+								readValues.canvasWidth = Integer.parseInt(read[1]);
+								break;
+							case "CanvasHeight": 
+								readValues.canvasHeight = Integer.parseInt(read[1]);
+								break;
+							case "CanvasColor": 
+								readValues.canvasColor = read[1];
+								break;
+						}
+					}
 					valid = true; // mark that settings import was completed
 				}catch(Exception ex) { // any exception
 					System.out.println("Exception encounterd: " + ex);
@@ -166,34 +188,16 @@ class TextGuiSettings implements Settings{
 		settings.createNewFile();
 		// open write stream to file
 		BufferedWriter fw = new BufferedWriter(new FileWriter(this.FILENAME));
-		// DATA WRITING
-		fw.write("Scene Width: "); // label
-		fw.write(Integer.toString(this.sceneWidth)); // value
+		// HELPER TEXT WRITING in two first files
+		fw.write("#Values for colors must be lowercase strings. Possible values are:");
 		fw.newLine();
-		fw.write("Scene Height: ");
-		fw.write(Integer.toString(this.sceneHeight));
+		fw.write("#red, green, blue, yellow, purple and black.");
 		fw.newLine();
-		fw.write("Scene Color: ");
-		fw.write(this.sceneColor);
-		fw.newLine();
-		fw.write("Canvas Width: ");
-		fw.write(Integer.toString(this.canvasWidth));
-		fw.newLine();
-		fw.write("Canvas Height: ");
-		fw.write(Integer.toString(this.canvasHeight));
-		fw.newLine();
-		fw.write("Canvas Color: ");
-		fw.write(this.canvasColor);
-		fw.newLine();
-		// HELPER TEXT WRITING
-		fw.newLine(); // extra line
-		fw.write("modification directives:");
-		fw.newLine(); // extra line
-		fw.write("Values for widths and heights must be integers.");
-		fw.newLine();
-		fw.write("Values for colors must be lowercase strings. Possible values are:");
-		fw.newLine();
-		fw.write("red, green, blue, yellow, purple and black.");
-		fw.close(); // IMPORTANT CLOSE FILEWRITERS
+		// DATA WRITTING
+		for(int i = 0; i < DEFAULTS.length; i++) {
+			fw.write(LABELS[i] + "=" + this.listSettings()[i]);
+			fw.newLine();
+		}
+		fw.close(); // ALWAYS CLOSE
 	}
 }

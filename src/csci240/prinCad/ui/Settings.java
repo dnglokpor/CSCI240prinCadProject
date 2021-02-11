@@ -9,17 +9,18 @@ import javafx.scene.paint.Color;
  */
 interface Settings {
 	// path and file names
-	String PATH_TO_SETTINGS = "./config/";
-	String SETTINGS_FILE_NAME = "guiconfig";
+	final static String PATH_TO_SETTINGS = "./config/";
+	final static String SETTINGS_FILE_NAME = "guiconfig.txt";
+	final static String FILENAME = PATH_TO_SETTINGS + SETTINGS_FILE_NAME;
 	
 	// initial values
 	String[] LABELS = new String[] {
-		"Scene Width: ",  	// [0]
-		"Scene Height: ", 	// [1]
-		"Scene Color: ",  	// [2]
-		"Canvas Width: ", 	// [3]
-		"Canvas Height: ",	// [4]
-		"Canvas Color: "  	// [5]
+		"SceneWidth",  	// [0]
+		"SceneHeight", 	// [1]
+		"SceneColor",  	// [2]
+		"CanvasWidth", 	// [3]
+		"CanvasHeight",	// [4]
+		"CanvasColor"  	// [5]
 	};
 	String[] DEFAULTS = new String[] {
 		"300", 		// [0]
@@ -32,11 +33,11 @@ interface Settings {
 	
 	// color presets
 	String[] PRESET_NAMES = { // strings arguments
-		"red", "green", "blue", "yellow", "purple", "black" 
+		"red", "green", "blue", "yellow", "purple", "grey", "black" 
 	};
 	Color[] PRESET_VALUES = { // indexed Colors
 		Color.ORANGERED, Color.FORESTGREEN, Color.CADETBLUE, Color.DARKGOLDENROD,
-		Color.MEDIUMPURPLE, Color.BLACK
+		Color.MEDIUMPURPLE, Color.DARKGRAY, Color.BLACK
 	};
 	
 	// methods to override

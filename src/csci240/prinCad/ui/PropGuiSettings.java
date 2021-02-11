@@ -18,7 +18,6 @@ import javafx.scene.paint.Color;
 class PropGuiSettings implements Settings{
 	// attributes
 	private Properties guiSettings;
-	private String filename;
 	
 	/** constructor:
 	 * adds the default values of the Settings interface to the Properties
@@ -30,7 +29,6 @@ class PropGuiSettings implements Settings{
 		for(int i = 0; i < DEFAULTS.length; i++) {
 			guiSettings.setProperty(LABELS[i], DEFAULTS[i]);
 		}
-		filename = PATH_TO_SETTINGS + SETTINGS_FILE_NAME; // no extension specified
 	}
 	
 	// getters
@@ -90,10 +88,10 @@ class PropGuiSettings implements Settings{
 	 * @throws IOException when the file wasn't found or couldn't be accessed
 	 */
 	public void readSettings() throws IOException {
-		File settings = new File(this.filename);
+		File settings = new File(this.FILENAME);
 		
 		if(settings.exists()) { // the file exists
-			FileInputStream in = new FileInputStream(this.filename); // set input stream
+			FileInputStream in = new FileInputStream(this.FILENAME); // set input stream
 			guiSettings.load(in); // import data
 			in.close(); // CLOSE THE STREAM
 		}
@@ -109,7 +107,7 @@ class PropGuiSettings implements Settings{
 		if(!new File(PATH_TO_SETTINGS).exists()) { 
 			new File(PATH_TO_SETTINGS).mkdirs(); 
 		}
-		FileOutputStream out = new FileOutputStream(this.filename); // set output stream
+		FileOutputStream out = new FileOutputStream(this.FILENAME); // set output stream
 		guiSettings.store(out, "-- prinCad UI settings parameters --"); // save to file
 		out.close(); // CLOSE STREAM
 	}
