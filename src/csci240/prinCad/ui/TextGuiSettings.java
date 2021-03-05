@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+import csci240.prinCad.ui.Log.LoggingLevel;
 import javafx.scene.paint.Color;
 
 /** TextGuiSettings Object:
@@ -22,6 +23,7 @@ class TextGuiSettings implements Settings{
 	private int canvasWidth;
 	private int canvasHeight;
 	private String canvasColor;
+	private String verbosity;
 	
 	/** default constructor:
 	 * initialize all the attributes with the default values from the Settings
@@ -66,6 +68,22 @@ class TextGuiSettings implements Settings{
 		return Color.BLACK;  // else return default
 	}
 	
+	/**
+	 * try to send the current verbosity read from the file. if it is invalid
+	 * converts value to default and send default.
+	 * @return the current verbosity level or default.
+	 */
+	public LoggingLevel getLoggingLevel() { 
+		try {
+			return LoggingLevel.valueOf(this.verbosity);
+		}catch(Exception ex){
+			System.out.println("User specified verbosity unknown.\n" + ex);
+			this.verbosity = LoggingLevel.Information.toString(); // modify current value
+		}
+		// if we weren't done
+		return LoggingLevel.valueOf(this.verbosity);
+	}
+	
 	// other methods
 	/**
 	 * return a Color object associated with passed string. conversion is done
@@ -100,9 +118,14 @@ class TextGuiSettings implements Settings{
 		this.canvasWidth = model.canvasWidth;
 		this.canvasHeight = model.canvasHeight;
 		this.canvasColor = model.canvasColor;
+		this.verbosity = model.verbosity;
 		// FILENAME DOESN'T HAVE TO BE CLONED
 	}
 	
+	/**
+	 * load the settings attributes into a String array for easy printing.
+	 * @return a String array with the data listed in order specified in the attributes.
+	 */
 	public String[] listSettings() {
 		String[] data = new String[DEFAULTS.length];
 		data[0] = Integer.toString(this.sceneWidth);
@@ -111,8 +134,10 @@ class TextGuiSettings implements Settings{
 		data[3] = Integer.toString(this.canvasWidth);
 		data[4] = Integer.toString(this.canvasHeight);
 		data[5] = this.canvasColor;
+		data[6] = this.verbosity;
 		return data;
 	}
+	
 	/**
 	 * load settings for this instance from the path and text file specified by
 	 * the interface. the text file is expected to be in a certain shape. If 
@@ -157,6 +182,11 @@ class TextGuiSettings implements Settings{
 							case "CanvasColor": 
 								readValues.canvasColor = read[1];
 								break;
+							case "Verbosity":
+								readValues.verbosity = read[1];
+								break;
+							default:
+								break;
 						}
 					}
 					valid = true; // mark that settings import was completed
@@ -179,7 +209,7 @@ class TextGuiSettings implements Settings{
 	 * @throws Exception in case any IO operation failed.
 	 */
 	public void saveSettings() throws Exception{
-		File settings = new File(this.FILENAME); 
+		File settings = new File(this.FILENAME);
 		// check that path exists
 		if(!new File(PATH_TO_SETTINGS).exists()) { 
 			new File(PATH_TO_SETTINGS).mkdirs(); 

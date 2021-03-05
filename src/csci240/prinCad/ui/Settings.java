@@ -1,6 +1,7 @@
 package csci240.prinCad.ui;
 
 import javafx.scene.paint.Color;
+import csci240.prinCad.ui.Log.LoggingLevel;
 
 /** Settings interface:
  * sets the basic requirement of Objects that can be used to setup the
@@ -20,15 +21,17 @@ interface Settings {
 		"SceneColor",  	// [2]
 		"CanvasWidth", 	// [3]
 		"CanvasHeight",	// [4]
-		"CanvasColor"  	// [5]
+		"CanvasColor",  // [5]
+		"Verbosity"		// [6]
 	};
 	String[] DEFAULTS = new String[] {
-		"300", 		// [0]
-		"250",		// [1]
-		"yellow",	// [2]
-		"275",		// [3]
-		"225",		// [4]
-		"black"		// [5]
+		"300", 			// [0]
+		"250",			// [1]
+		"yellow",		// [2]
+		"275",			// [3]
+		"225",			// [4]
+		"black",		// [5]
+		"Information"
 	};
 	
 	// color presets
@@ -48,6 +51,7 @@ interface Settings {
 	int getCanvasHeight();
 	Color getSceneColor();
 	Color getCanvasColor();
+	LoggingLevel getLoggingLevel();
 	
 	/**
 	 * must be used to read settings from the predefined settings file

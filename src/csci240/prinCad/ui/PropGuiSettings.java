@@ -5,8 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 import javafx.scene.paint.Color;
+
+import csci240.prinCad.ui.Log.LoggingLevel;
 
 /** PropGuiSettings Object:
  * this object allows to record, import and save parameters of the
@@ -47,6 +48,7 @@ class PropGuiSettings implements Settings{
 		Color returned = assignColor(this.guiSettings.getProperty(LABELS[2]));
 		if(returned != null) // check that input is valid
 			return returned;
+		this.guiSettings.setProperty(LABELS[2], "yellow");
 		return Color.DARKGOLDENROD;  // else return default
 	}
 	
@@ -57,7 +59,26 @@ class PropGuiSettings implements Settings{
 		Color returned = assignColor(this.guiSettings.getProperty(LABELS[5]));
 		if(returned != null) // check that input is valid
 			return returned;
+		this.guiSettings.setProperty(LABELS[5], "black");
 		return Color.BLACK;  // else return default
+	}
+	
+	/**
+	 * try to send the current verbosity read from the file. if it is invalid
+	 * converts value to default and send default.
+	 * @return the current verbosity level or default.
+	 */
+	public LoggingLevel getLoggingLevel() { 
+		String verb = this.guiSettings.getProperty(LABELS[6]);
+		try {
+			return LoggingLevel.valueOf(verb);
+		}catch(Exception ex){
+			System.out.println("User specified verbosity unknown.\n" + ex);
+			this.guiSettings.setProperty(LABELS[6], 
+					LoggingLevel.Information.toString()); // modify current value
+		}
+		// if we weren't done
+		return LoggingLevel.valueOf(this.guiSettings.getProperty(LABELS[6]));
 	}
 	
 	// other methods
