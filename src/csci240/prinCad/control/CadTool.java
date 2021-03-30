@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
  */
 public abstract class CadTool {
 	// attributes
-	protected PrinCanvas pad;
+	protected PrinCanvas _canvas;
 	protected double[] _old = new double[] {0,0,0,0}; // old selection coords DILLON's help
 	// Mouse movement properties
 	boolean _activeMouse;
@@ -26,7 +26,7 @@ public abstract class CadTool {
 	 * @param pc the canvas to select on
 	 */
 	public CadTool(PrinCanvas pc) {
-		this.pad = pc;
+		this._canvas = pc;
 	}
 	
 	// methods to implement
@@ -43,19 +43,27 @@ public abstract class CadTool {
 			_xEnd = x;
 			_yEnd = y;
 			_activeMouse = true;
-			pad.setGraphicsContext(pad.getGraphicsContext2D());
-			pad.getGraphicsContext().setStroke(Color.ORANGERED);
-			pad.getGraphicsContext().setLineWidth(0);
-			pad.setCursor(Cursor.CROSSHAIR);
+			_canvas.getGraphicsContext().setStroke(Color.ORANGERED);
+			_canvas.getGraphicsContext().setLineWidth(0);
+			_canvas.setCursor(Cursor.CROSSHAIR);
 		}
 	}
 	
 	/**
-	 * handler that respond to the canvas sensing mouse being dragged across the screen.
-	 * this is abstract because it can change depending on what selection must be done.
+	 * handler that respond to the canvas sensing mouse being dragged across the screen with a 
+	 * button pressed. this is abstract because it can change depending on what selection must
+	 * be done.
 	 * @param me the mouse event to handle.
 	 */
-	public abstract void onMouseDrag(MouseEvent me);
+	public void onMouseDrag(MouseEvent me) {}
+	
+	/**
+	 * handler that respond to the canvas sensing mouse being dragged across the screen without
+	 * a button pressed. this is abstract because it can change depending on what selection must
+	 * be done.
+	 * @param me the mouse event to handle.
+	 */
+	public void onMouseMove(MouseEvent me) {}
 	
 	/**
 	 * handler that respond to the canvas sensing mouse button being released.
@@ -64,9 +72,8 @@ public abstract class CadTool {
 	public void onMouseRelease(MouseEvent me) {
 		if(_activeMouse) {
 			_activeMouse = false;
-			pad.setCursor(Cursor.DEFAULT);
-			pad.getGraphicsContext().fillRect(_old[0], _old[1], _old[2], _old[3]); // delete last selection
-			pad.setGraphicsContext(null);
+			_canvas.setCursor(Cursor.DEFAULT);
+			_canvas.draw(); // redraw the canvas image
 		}
 	}
 	

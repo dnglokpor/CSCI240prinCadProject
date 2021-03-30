@@ -149,7 +149,7 @@ class TextGuiSettings implements Settings{
 		// create a new GuiSetting to record data from file
 		TextGuiSettings readValues = new TextGuiSettings();
 		// reference the file with complete path
-		File settings = new File(this.FILENAME);
+		File settings = new File(Settings.FILENAME);
 		boolean valid = false; // flag
 		
 		// we do nothing if the file doesn't exist
@@ -209,7 +209,7 @@ class TextGuiSettings implements Settings{
 	 * @throws Exception in case any IO operation failed.
 	 */
 	public void saveSettings() throws Exception{
-		File settings = new File(this.FILENAME);
+		File settings = new File(Settings.FILENAME);
 		// check that path exists
 		if(!new File(PATH_TO_SETTINGS).exists()) { 
 			new File(PATH_TO_SETTINGS).mkdirs(); 
@@ -217,7 +217,7 @@ class TextGuiSettings implements Settings{
 		// create file
 		settings.createNewFile();
 		// open write stream to file
-		BufferedWriter fw = new BufferedWriter(new FileWriter(this.FILENAME));
+		BufferedWriter fw = new BufferedWriter(new FileWriter(Settings.FILENAME));
 		// HELPER TEXT WRITING in two first files
 		fw.write("#Values for colors must be lowercase strings. Possible values are:");
 		fw.newLine();
@@ -229,5 +229,29 @@ class TextGuiSettings implements Settings{
 			fw.newLine();
 		}
 		fw.close(); // ALWAYS CLOSE
+	}
+
+	/**
+	 * set the canvas width property to the passed value.
+	 * @param newVal the passed width attribute
+	 */
+	@Override
+	public void setCanvasWidth(double newVal) {
+		this.canvasWidth = (int) newVal;
+	}
+
+	@Override
+	public void setCanvasHeight(double newVal) {
+		this.canvasHeight = (int) newVal;
+	}
+
+	@Override
+	public void setSceneWidth(double newVal) {
+		this.sceneWidth = (int) newVal;
+	}
+
+	@Override
+	public void setSceneHeight(double newVal) {
+		this.sceneHeight = (int) newVal;
 	}
 }

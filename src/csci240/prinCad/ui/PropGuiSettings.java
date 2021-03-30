@@ -13,7 +13,7 @@ import csci240.prinCad.ui.Log.LoggingLevel;
  * this object allows to record, import and save parameters of the
  * prinCad UI as a Java.util.Properties object. this uses an array
  * of values to match each required item.
- * @author dnglo
+ * @author dnglokpor
  *
  */
 class PropGuiSettings implements Settings{
@@ -109,10 +109,10 @@ class PropGuiSettings implements Settings{
 	 * @throws IOException when the file wasn't found or couldn't be accessed
 	 */
 	public void readSettings() throws IOException {
-		File settings = new File(this.FILENAME);
+		File settings = new File(FILENAME);
 		
 		if(settings.exists()) { // the file exists
-			FileInputStream in = new FileInputStream(this.FILENAME); // set input stream
+			FileInputStream in = new FileInputStream(FILENAME); // set input stream
 			guiSettings.load(in); // import data
 			in.close(); // CLOSE THE STREAM
 		}
@@ -128,8 +128,40 @@ class PropGuiSettings implements Settings{
 		if(!new File(PATH_TO_SETTINGS).exists()) { 
 			new File(PATH_TO_SETTINGS).mkdirs(); 
 		}
-		FileOutputStream out = new FileOutputStream(this.FILENAME); // set output stream
+		FileOutputStream out = new FileOutputStream(FILENAME); // set output stream
 		guiSettings.store(out, "-- prinCad UI settings parameters --"); // save to file
 		out.close(); // CLOSE STREAM
+	}
+
+	@Override
+	/**
+	 * changes the current value of the canvas width property.
+	 */
+	public void setCanvasWidth(double newVal) {
+		guiSettings.setProperty(LABELS[3], String.valueOf((int) newVal));
+	}
+
+	/**
+	 * changes the current value of the canvas height property.
+	 */
+	@Override
+	public void setCanvasHeight(double newVal) {
+		guiSettings.setProperty(LABELS[4], String.valueOf((int) newVal));
+	}
+	
+	@Override
+	/**
+	 * changes the current value of the canvas width property.
+	 */
+	public void setSceneWidth(double newVal) {
+		guiSettings.setProperty(LABELS[0], String.valueOf((int) newVal));
+	}
+
+	/**
+	 * changes the current value of the scene height property.
+	 */
+	@Override
+	public void setSceneHeight(double newVal) {
+		guiSettings.setProperty(LABELS[1], String.valueOf((int) newVal));
 	}
 }

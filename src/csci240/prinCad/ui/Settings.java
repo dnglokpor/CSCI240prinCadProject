@@ -25,13 +25,13 @@ interface Settings {
 		"Verbosity"		// [6]
 	};
 	String[] DEFAULTS = new String[] {
-		"300", 			// [0]
-		"250",			// [1]
+		"900", 			// [0]
+		"600",			// [1]
 		"yellow",		// [2]
-		"275",			// [3]
-		"225",			// [4]
+		"700",			// [3]
+		"550",			// [4]
 		"black",		// [5]
-		"Information"
+		"Information"	// [6]
 	};
 	
 	// color presets
@@ -47,6 +47,10 @@ interface Settings {
 	// getters for all the attributes needed
 	int getSceneWidth();
 	int getSceneHeight();
+	void setCanvasWidth(double newVal);
+	void setCanvasHeight(double newVal);
+	void setSceneWidth(double newVal);
+	void setSceneHeight(double newVal);
 	int getCanvasWidth();	
 	int getCanvasHeight();
 	Color getSceneColor();

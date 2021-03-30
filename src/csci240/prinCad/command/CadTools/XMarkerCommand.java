@@ -1,26 +1,27 @@
-package csci240.prinCad.command.CadTools.Markers;
+package csci240.prinCad.command.CadTools;
 
 import csci240.prinCad.command.CommandHandler;
+import csci240.prinCad.control.XMarkerTool;
 import csci240.prinCad.ui.Log;
 import csci240.prinCad.ui.PrinCanvas;
 import javafx.event.ActionEvent;
 
-/** RectMarkerCommand class:
+/** XMarkerCommand class:
  * handle the action of the Box option under the Marker menu.
  * @author dnglokpor
  *
  */
-public class RectMarkerCommand extends CommandHandler {
+public class XMarkerCommand extends CommandHandler {
 
 	// constructor
-	public RectMarkerCommand(PrinCanvas canvas) {
+	public XMarkerCommand(PrinCanvas canvas) {
 		super(canvas);
 	}
 	
 	// handle action event
 	@Override
 	public void action(ActionEvent e) {
-		Log.info("Draw Rect");
-		// TODO make the code
+		Log.info("Draw X");
+		this.getCanvas().setActiveTool(new XMarkerTool(_canvas));
 	}
 }
