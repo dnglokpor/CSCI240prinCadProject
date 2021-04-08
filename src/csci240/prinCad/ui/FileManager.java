@@ -1,7 +1,10 @@
-package csci240.prinCad.command.File;
+package csci240.prinCad.ui;
 
-import csci240.prinCad.command.MenuManager;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.File.NewFileCommand;
+import csci240.prinCad.command.File.OpenFileCommand;
+import csci240.prinCad.command.File.SaveAsFileCommand;
+import csci240.prinCad.command.File.SaveFileCommand;
+import csci240.prinCad.command.CanvasCommandInterface;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -23,9 +26,9 @@ public class FileManager implements MenuManager{
 	
 	/**
 	 * takes in a canvas and associates an instance of each of the commands to it.
-	 * @param canvas the PrinCanvas object being drawn on.
+	 * @param canvas the CanvasCommandInterface object being drawn on.
 	 */
-	public FileManager(PrinCanvas canvas) {
+	public FileManager(CanvasCommandInterface canvas) {
 		_newFileCommand = new NewFileCommand(canvas);
 		_openFileCommand = new OpenFileCommand(canvas);
 		_saveFileCommand = new SaveFileCommand(canvas);

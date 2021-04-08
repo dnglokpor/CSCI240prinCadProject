@@ -1,20 +1,15 @@
 package csci240.prinCad.control;
 
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.input.MouseEvent;
 
 public class BoxSelectionTool extends CadTool{
 
 	/** constructor:
-	 * builds a rectangle selection object by passing the PrinCanvas argument to base
-	 * selector class.
-	 * @param pc the PrinCanvas being drawn on.
+	 * use default
 	 */
-	public BoxSelectionTool(PrinCanvas pc) {
-		super(pc); // build base Selector
-	}
 	
-	public void onMouseDrag(MouseEvent me) {
+	public void onMouseDrag(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			// clear old selection
 			_canvas.draw();

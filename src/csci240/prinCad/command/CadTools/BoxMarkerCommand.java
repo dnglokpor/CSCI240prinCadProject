@@ -1,9 +1,10 @@
 package csci240.prinCad.command.CadTools;
 
+import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.command.CommandHandler;
 import csci240.prinCad.control.BoxMarkerTool;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** UndoEditCommand class:
@@ -14,7 +15,7 @@ import javafx.event.ActionEvent;
 public class BoxMarkerCommand extends CommandHandler {
 
 	// constructor
-	public BoxMarkerCommand(PrinCanvas canvas) {
+	public BoxMarkerCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -23,6 +24,6 @@ public class BoxMarkerCommand extends CommandHandler {
 	public void action(ActionEvent e) {
 		Log.info("Draw []");
 		// instantiate tool
-		this.getCanvas().setActiveTool(new BoxMarkerTool(_canvas));
+		this.getCanvas().setActiveTool(new BoxMarkerTool());
 	}
 }

@@ -3,7 +3,7 @@ package csci240.prinCad.control;
 import java.util.ArrayList;
 
 import csci240.prinCad.model.PolyItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -21,16 +21,15 @@ public class PolyCadTool extends CadTool {
 	
 	
 	/** constructor:
-	 * 
-	 * @param canvas set the canvas to draw on.
+	 * initialize array of points.
 	 */
-	public PolyCadTool(PrinCanvas canvas) {
-		super(canvas);
+	public PolyCadTool() {
+		super();
 		_lines = new ArrayList<Double>();
 	}
 	
 	@Override
-	public void onMousePressed(MouseEvent me) {
+	public void onMousePressed(MouseEvent me, CanvasToolInterface _canvas) {
 		if(me.getButton() == MouseButton.SECONDARY) {
 			// done drawing
 			_lines.add(_xEnd);
@@ -42,11 +41,11 @@ public class PolyCadTool extends CadTool {
 			_canvas.reset(new PolyItem(_lines));
 		}
 		// else do what is usually done
-		super.onMousePressed(me);
+		super.onMousePressed(me, _canvas);
 	}
 		
 	@Override
-	public void onMouseMove(MouseEvent me) {
+	public void onMouseMove(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			// update line end
 			_xEnd = me.getX();
@@ -61,7 +60,7 @@ public class PolyCadTool extends CadTool {
 	}
 	
 	@Override
-	public void onMouseRelease(MouseEvent me) {
+	public void onMouseRelease(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse && me.getButton() == MouseButton.PRIMARY) {
 			// record pivots coordinates
 			_lines.add(_xPivot);

@@ -1,7 +1,7 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.CadItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -23,39 +23,35 @@ public abstract class MarkerTool extends CadTool {
 	//boolean _activeMouse; // actually needed?
 	
 	/** constructor:
-	 * instantiate parent CadTool class.
-	 * @param canvas
+	 * using default
 	 */
-	public MarkerTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	// command handler overrides
 	@Override
-	public void onMousePressed(MouseEvent me) {
+	public void onMousePressed(MouseEvent me, CanvasToolInterface _canvas) {
 		if(me.getButton() == MouseButton.PRIMARY) {
-			this._canvas.setCursor(Cursor.CROSSHAIR);
+			_canvas.setCursor(Cursor.CROSSHAIR);
 			this._activeMouse = true;
 		}
 	}
 	
 	@Override
-	public void onMouseDrag(MouseEvent me) { }
+	public void onMouseDrag(MouseEvent me, CanvasToolInterface _canvas) { }
 
 	@Override
-	public void onMouseRelease(MouseEvent me){
+	public void onMouseRelease(MouseEvent me, CanvasToolInterface _canvas){
 		if(this._activeMouse) {
 			this._activeMouse = false;
-			this._canvas.setCursor(Cursor.DEFAULT);
-			this._canvas.getGraphicsContext().setStroke(Color.ORANGERED);
-			this._canvas.getGraphicsContext().setLineWidth(0);
+			_canvas.setCursor(Cursor.DEFAULT);
+			_canvas.getGraphicsContext().setStroke(Color.ORANGERED);
+			_canvas.getGraphicsContext().setLineWidth(0);
 			
-			this.draw(me); // draw the marker
+			this.draw(me, _canvas); // draw the marker
 			
-			this._canvas.reset(_drawn); // get the selection tool back
+			_canvas.reset(_drawn); // get the selection tool back
 		}
 	}
 	
 	// draw the shape of the marker
-	protected abstract void draw(MouseEvent me);
+	protected abstract void draw(MouseEvent me, CanvasToolInterface _canvas);
 }

@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import csci240.prinCad.command.CommandHandler;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.CanvasCommandInterface;
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** SaveFileCommand class:
@@ -22,7 +22,7 @@ import javafx.event.ActionEvent;
 public class SaveFileCommand extends CommandHandler {
 
 	// constructor
-	public SaveFileCommand(PrinCanvas canvas) {
+	public SaveFileCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	

@@ -1,4 +1,4 @@
-package csci240.prinCad.command;
+package csci240.prinCad.ui;
 
 import javafx.scene.control.Menu;
 import javafx.collections.ObservableList;

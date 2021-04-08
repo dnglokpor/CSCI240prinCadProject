@@ -1,13 +1,13 @@
 package csci240.prinCad.command.Edit;
 
 import csci240.prinCad.command.CommandHandler;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.CanvasCommandInterface;
 import javafx.event.ActionEvent;
 
 public class ToggleSelectEditCommand extends CommandHandler {
 
 	// constructor
-	public ToggleSelectEditCommand(PrinCanvas canvas) {
+	public ToggleSelectEditCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	

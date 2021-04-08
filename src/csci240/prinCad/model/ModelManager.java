@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import csci240.prinCad.ui.Log;
+import csci240.prinCad.util.Log;
 import javafx.scene.canvas.GraphicsContext;
 
 /** ModelManager class:

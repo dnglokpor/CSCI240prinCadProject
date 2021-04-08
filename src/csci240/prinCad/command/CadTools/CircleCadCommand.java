@@ -1,9 +1,10 @@
 package csci240.prinCad.command.CadTools;
 
 import csci240.prinCad.command.CommandHandler;
+import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.control.CircleCadTool;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** CircleMarkerCommand class:
@@ -14,7 +15,7 @@ import javafx.event.ActionEvent;
 public class CircleCadCommand extends CommandHandler {
 
 	// constructor
-	public CircleCadCommand(PrinCanvas canvas) {
+	public CircleCadCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -22,6 +23,6 @@ public class CircleCadCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		Log.info("Draw Circle");
-		this.getCanvas().setActiveTool(new CircleCadTool(_canvas));
+		this.getCanvas().setActiveTool(new CircleCadTool());
 	}
 }

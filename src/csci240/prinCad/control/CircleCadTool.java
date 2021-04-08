@@ -1,7 +1,7 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.CircleItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 
@@ -15,14 +15,11 @@ public class CircleCadTool extends CadTool {
 	double _radius;
 	
 	/** constructor:
-	 * @param canvas set the canvas to draw on.
+	 * use default
 	 */
-	public CircleCadTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	@Override
-	public void onMouseDrag(MouseEvent me) {
+	public void onMouseDrag(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			// update mouse end coordinates
 			_xEnd = me.getX();
@@ -41,7 +38,7 @@ public class CircleCadTool extends CadTool {
 	}
 	
 	@Override
-	public void onMouseRelease(MouseEvent me) {
+	public void onMouseRelease(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			_activeMouse = false;
 			_canvas.setCursor(Cursor.DEFAULT);

@@ -5,9 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-import javafx.scene.paint.Color;
 
-import csci240.prinCad.ui.Log.LoggingLevel;
+import csci240.prinCad.util.Log.LoggingLevel;
+import javafx.scene.paint.Color;
 
 /** PropGuiSettings Object:
  * this object allows to record, import and save parameters of the

@@ -1,9 +1,10 @@
 package csci240.prinCad.command.CadTools;
 
 import csci240.prinCad.command.CommandHandler;
+import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.control.LineCadTool;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** LineMarkerCommand class:
@@ -14,7 +15,7 @@ import javafx.event.ActionEvent;
 public class LineCadCommand extends CommandHandler {
 
 	// constructor
-	public LineCadCommand(PrinCanvas canvas) {
+	public LineCadCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -22,6 +23,6 @@ public class LineCadCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		Log.info("Draw Line");
-		this.getCanvas().setActiveTool(new LineCadTool(_canvas));
+		this.getCanvas().setActiveTool(new LineCadTool());
 	}
 }

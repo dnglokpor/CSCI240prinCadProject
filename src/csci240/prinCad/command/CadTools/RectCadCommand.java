@@ -1,9 +1,10 @@
 package csci240.prinCad.command.CadTools;
 
 import csci240.prinCad.command.CommandHandler;
+import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.control.RectCadTool;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** RectMarkerCommand class:
@@ -14,7 +15,7 @@ import javafx.event.ActionEvent;
 public class RectCadCommand extends CommandHandler {
 
 	// constructor
-	public RectCadCommand(PrinCanvas canvas) {
+	public RectCadCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -22,6 +23,6 @@ public class RectCadCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		Log.info("Draw Rect");
-		this.getCanvas().setActiveTool(new RectCadTool(_canvas));
+		this.getCanvas().setActiveTool(new RectCadTool());
 	}
 }

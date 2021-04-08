@@ -1,7 +1,7 @@
 package csci240.prinCad.ui;
 
+import csci240.prinCad.util.Log.LoggingLevel;
 import javafx.scene.paint.Color;
-import csci240.prinCad.ui.Log.LoggingLevel;
 
 /** Settings interface:
  * sets the basic requirement of Objects that can be used to setup the

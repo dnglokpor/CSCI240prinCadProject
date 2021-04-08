@@ -1,7 +1,11 @@
-package csci240.prinCad.command.Edit;
+package csci240.prinCad.ui;
 
-import csci240.prinCad.command.MenuManager;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.Edit.DelEditCommand;
+import csci240.prinCad.command.Edit.PropertiesEditCommand;
+import csci240.prinCad.command.Edit.RedoEditCommand;
+import csci240.prinCad.command.Edit.ToggleSelectEditCommand;
+import csci240.prinCad.command.Edit.UndoEditCommand;
+import csci240.prinCad.command.CanvasCommandInterface;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -25,9 +29,9 @@ public class EditManager implements MenuManager{
 	
 	/**
 	 * takes in a canvas and associates an instance of each of the commands to it.
-	 * @param canvas the PrinCanvas object being drawn on.
+	 * @param canvas the CanvasCommandInterface object being drawn on.
 	 */
-	public EditManager(PrinCanvas canvas) {
+	public EditManager(CanvasCommandInterface canvas) {
 		_undoEditCommand = new UndoEditCommand(canvas);
 		_redoEditCommand = new RedoEditCommand(canvas);
 		_delEditCommand = new DelEditCommand(canvas);

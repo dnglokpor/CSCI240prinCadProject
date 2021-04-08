@@ -1,14 +1,14 @@
 package csci240.prinCad.command.File;
 
 import csci240.prinCad.command.CommandHandler;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.CanvasCommandInterface;
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 public class NewFileCommand extends CommandHandler {
 
 	// constructor
-	public NewFileCommand(PrinCanvas canvas) {
+	public NewFileCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	

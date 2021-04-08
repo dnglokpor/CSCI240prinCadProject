@@ -1,7 +1,7 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.PlusItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 
@@ -13,18 +13,15 @@ import javafx.scene.input.MouseEvent;
 public class PlusMarkerTool extends MarkerTool {
 	
 	/** constructor:
-	 * @param canvas PrinCanvas instance to draw on
+	 * using default
 	 */
-	public PlusMarkerTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	/**
 	 * draw a "+" character at the mouse position specified.
 	 * @param me the mouse event that specifies the position.
 	 */
 	@Override
-	protected void draw(MouseEvent me) {
+	protected void draw(MouseEvent me, CanvasToolInterface _canvas) {
 		_x = me.getX();
 		_y = me.getY();
 		// draw plus

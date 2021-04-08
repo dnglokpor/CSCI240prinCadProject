@@ -1,25 +1,22 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.BoxItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 
 public class BoxMarkerTool extends MarkerTool {
 	
 	/** constructor:
-	 * @param canvas PrinCanvas instance to draw on
+	 * using default
 	 */
-	public BoxMarkerTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	/**
 	 * draw the a small "[]" on the canvas at the mouse position.
 	 * @param me the mouse event that specify the position.
 	 */
 	@Override
-	protected void draw(MouseEvent me) {
+	protected void draw(MouseEvent me, CanvasToolInterface _canvas) {
 		_x = me.getX();
 		_y = me.getY();
 		// draw box

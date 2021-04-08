@@ -1,7 +1,14 @@
-package csci240.prinCad.command.CadTools;
+package csci240.prinCad.ui;
 
-import csci240.prinCad.command.MenuManager;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.CanvasCommandInterface;
+import csci240.prinCad.command.CadTools.BoxMarkerCommand;
+import csci240.prinCad.command.CadTools.CircleCadCommand;
+import csci240.prinCad.command.CadTools.EllipseCadCommand;
+import csci240.prinCad.command.CadTools.LineCadCommand;
+import csci240.prinCad.command.CadTools.PlusMarkerCommand;
+import csci240.prinCad.command.CadTools.PolyCadCommand;
+import csci240.prinCad.command.CadTools.RectCadCommand;
+import csci240.prinCad.command.CadTools.XMarkerCommand;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -28,9 +35,9 @@ public class CadToolsManager implements MenuManager{
 	
 	/** constructor:
 	 * takes in a canvas and associates an instance of each of the commands to it.
-	 * @param canvas the PrinCanvas object being drawn on.
+	 * @param canvas the CanvasCommandInterface object being drawn on.
 	 */
-	public CadToolsManager(PrinCanvas canvas) {
+	public CadToolsManager(CanvasCommandInterface canvas) {
 		_plusMarkerCommand = new PlusMarkerCommand(canvas);
 		_boxMarkerCommand = new BoxMarkerCommand(canvas);
 		_xMarkerCommand = new XMarkerCommand(canvas);

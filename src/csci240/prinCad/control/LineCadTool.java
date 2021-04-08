@@ -1,7 +1,7 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.LineItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 
@@ -12,15 +12,11 @@ import javafx.scene.input.MouseEvent;
  */
 public class LineCadTool extends CadTool {
 	/** constructor:
-	 * 
-	 * @param canvas set the canvas to draw on.
+	 * use default
 	 */
-	public LineCadTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	@Override
-	public void onMouseDrag(MouseEvent me) {
+	public void onMouseDrag(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			// update line end
 			_xEnd = me.getX();
@@ -33,7 +29,7 @@ public class LineCadTool extends CadTool {
 	}
 	
 	@Override
-	public void onMouseRelease(MouseEvent me) {
+	public void onMouseRelease(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			_activeMouse = false;
 			_canvas.setCursor(Cursor.DEFAULT);

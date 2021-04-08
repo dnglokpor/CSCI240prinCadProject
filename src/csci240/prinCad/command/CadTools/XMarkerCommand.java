@@ -1,9 +1,10 @@
 package csci240.prinCad.command.CadTools;
 
 import csci240.prinCad.command.CommandHandler;
+import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.control.XMarkerTool;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** XMarkerCommand class:
@@ -14,7 +15,7 @@ import javafx.event.ActionEvent;
 public class XMarkerCommand extends CommandHandler {
 
 	// constructor
-	public XMarkerCommand(PrinCanvas canvas) {
+	public XMarkerCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -22,6 +23,6 @@ public class XMarkerCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		Log.info("Draw X");
-		this.getCanvas().setActiveTool(new XMarkerTool(_canvas));
+		this.getCanvas().setActiveTool(new XMarkerTool());
 	}
 }

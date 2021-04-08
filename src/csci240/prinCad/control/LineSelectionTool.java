@@ -1,6 +1,6 @@
 package csci240.prinCad.control;
 
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.input.MouseEvent;
 
 /** LineSelector Object:
@@ -10,14 +10,10 @@ import javafx.scene.input.MouseEvent;
  */
 public class LineSelectionTool extends CadTool{ 
 	/** constructor:
-	 * provide the abstract parent with the required PrinCanvas context object.
-	 * @param pc
+	 * use default
 	 */
-	public LineSelectionTool(PrinCanvas pc) {
-		super(pc); // construct base selector
-	}
 	
-	public void onMouseDrag(MouseEvent me) {
+	public void onMouseDrag(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			_canvas.draw(); // redraw image
 			// update line end

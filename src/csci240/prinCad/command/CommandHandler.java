@@ -1,6 +1,5 @@
 package csci240.prinCad.command;
 
-import csci240.prinCad.ui.PrinCanvas;
 import javafx.event.ActionEvent;
 
 /** CommandHandler abstract class:
@@ -12,13 +11,13 @@ import javafx.event.ActionEvent;
  */
 public abstract class CommandHandler {
 	// attributes
-	protected PrinCanvas _canvas;
+	protected CanvasCommandInterface _canvas;
 	
 	/** constructor:
-	 *	sets the _canvas attribute to the passed PrinCanvas instance being drawn on.
-	 * @param canvas the PrinCanvas on which to manage commands.
+	 *	sets the _canvas attribute to the passed CanvasCommandInterface instance being drawn on.
+	 * @param canvas the CanvasCommandInterface on which to manage commands.
 	 */
-	public CommandHandler(PrinCanvas canvas) {
+	public CommandHandler(CanvasCommandInterface canvas) {
 		_canvas = canvas;
 	}
 	
@@ -26,7 +25,7 @@ public abstract class CommandHandler {
 	/**
 	 * @return the current _canvas attribute. 
 	 */
-	public final PrinCanvas getCanvas() { return _canvas; }
+	public final CanvasCommandInterface getCanvas() { return _canvas; }
 	
 	// others
 	/**

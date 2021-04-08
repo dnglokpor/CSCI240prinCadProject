@@ -1,7 +1,7 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.RectItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 
@@ -14,14 +14,11 @@ public class RectCadTool extends CadTool {
 	// attributes
 	double x, y, w, h;
 	/** constructor:
-	 * @param canvas set the canvas to draw on.
+	 * using default
 	 */
-	public RectCadTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	@Override
-	public void onMouseDrag(MouseEvent me) {
+	public void onMouseDrag(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			// update mouse end coordinates
 			_xEnd = me.getX();
@@ -39,7 +36,7 @@ public class RectCadTool extends CadTool {
 	}
 	
 	@Override
-	public void onMouseRelease(MouseEvent me) {
+	public void onMouseRelease(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			_activeMouse = false;
 			_canvas.setCursor(Cursor.DEFAULT);

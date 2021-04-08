@@ -1,9 +1,10 @@
 package csci240.prinCad.command.CadTools;
 
 import csci240.prinCad.command.CommandHandler;
+import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.control.EllipseCadTool;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
 /** EllipseCadCommand class:
@@ -13,7 +14,7 @@ import javafx.event.ActionEvent;
 public class EllipseCadCommand extends CommandHandler {
 
 	// constructor
-	public EllipseCadCommand(PrinCanvas canvas) {
+	public EllipseCadCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -21,6 +22,6 @@ public class EllipseCadCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		Log.info("Draw Ellipse");
-		this.getCanvas().setActiveTool(new EllipseCadTool(_canvas));
+		this.getCanvas().setActiveTool(new EllipseCadTool());
 	}
 }

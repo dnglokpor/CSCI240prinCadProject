@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 
 import csci240.prinCad.command.CommandHandler;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.CanvasCommandInterface;
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -14,7 +14,7 @@ import javafx.stage.Window;
 public class OpenFileCommand extends CommandHandler {
 
 	// constructor
-	public OpenFileCommand(PrinCanvas canvas) {
+	public OpenFileCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	

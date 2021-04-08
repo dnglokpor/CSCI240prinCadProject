@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
-import csci240.prinCad.ui.Log.LoggingLevel;
+import csci240.prinCad.util.Log.LoggingLevel;
 import javafx.scene.paint.Color;
 
 /** TextGuiSettings Object:

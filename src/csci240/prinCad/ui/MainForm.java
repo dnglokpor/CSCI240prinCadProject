@@ -23,10 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import csci240.prinCad.command.MenuManager;
-import csci240.prinCad.command.CadTools.CadToolsManager;
-import csci240.prinCad.command.Edit.EditManager;
-import csci240.prinCad.command.File.FileManager;
+import csci240.prinCad.util.Log;
 
 /** MainForm class:
  * entry point of the application. pull up all resources, and launch the javaFX application. 
@@ -185,6 +182,7 @@ public class MainForm extends Application{
 	// java main entry point
 	public static void main(String[] args) throws Exception{
 		cadSettings.readSettings(); // restore/init settings
+		Log.setLoggingLevel(cadSettings.getLoggingLevel());
 		
 		Log.info("PrinCad begin execution"); // log successful start
 		

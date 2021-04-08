@@ -2,7 +2,7 @@ package csci240.prinCad.model;
 
 import java.util.ArrayList;
 
-import csci240.prinCad.ui.Log;
+import csci240.prinCad.util.Log;
 import javafx.scene.canvas.GraphicsContext;
 
 /** PolyItem class:

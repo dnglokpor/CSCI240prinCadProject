@@ -1,7 +1,7 @@
 package csci240.prinCad.control;
 
 import csci240.prinCad.model.EllipseItem;
-import csci240.prinCad.ui.PrinCanvas;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -18,17 +18,14 @@ public class EllipseCadTool extends CadTool {
 	
 	
 	/** constructor:
-	 * @param canvas set the canvas to draw on.
+	 * use default
 	 */
-	public EllipseCadTool(PrinCanvas canvas) {
-		super(canvas);
-	}
 	
 	@Override
-	public void onMousePressed(MouseEvent me) {};
+	public void onMousePressed(MouseEvent me, CanvasToolInterface _canvas) {};
 
 	@Override
-	public void onMouseMove(MouseEvent me) {
+	public void onMouseMove(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) {
 			// update mouse end coordinates
 			_xEnd = me.getX();
@@ -50,7 +47,7 @@ public class EllipseCadTool extends CadTool {
 	}
 	
 	@Override
-	public void onMouseRelease(MouseEvent me) {
+	public void onMouseRelease(MouseEvent me, CanvasToolInterface _canvas) {
 		if(_activeMouse) { // end of drawing
 			_activeMouse = false;
 			_canvas.setCursor(Cursor.DEFAULT);

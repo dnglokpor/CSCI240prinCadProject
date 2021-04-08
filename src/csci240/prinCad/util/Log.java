@@ -1,4 +1,4 @@
-package csci240.prinCad.ui;
+package csci240.prinCad.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -22,6 +22,7 @@ public class Log {
 	 * @author dnglokpor
 	 *
 	 */
+	
 	private interface Logging{
 		
 		/**
@@ -121,14 +122,18 @@ public class Log {
 	final static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME; // create formatter
 	
 	/** constructor:
-	 * instantiate the right logger depending on the global user defined verbose
-	 * level. (factory design).
+	 * instantiate a default logging to info.
 	 */
 	private Log() {
-		LoggingLevel loggingLevel = MainForm.cadSettings.getLoggingLevel();
-		
-		// loggers factory
-		switch(loggingLevel) {
+		_logging = new LogInfo();
+	}
+	
+	/**
+	 * change instance logger to specified.
+	 * @param ll specified logging level.
+	 */
+	public void changeInstanceLoggingLevel(LoggingLevel ll) {
+		switch(ll) {
 			case None:
 				_logging = new LogNone();
 				break;
@@ -139,6 +144,15 @@ public class Log {
 				_logging = new LogInfo();
 				break;
 		}
+	}
+	
+	/**
+	 * allow changes of logging level from an outside sources even when Log doesn't yet exists.
+	 * @param ll specified logging level.
+	 */
+	public static void setLoggingLevel(LoggingLevel ll) {
+		// loggers factory
+		_instance.changeInstanceLoggingLevel(ll);
 	}
 	
 	/**

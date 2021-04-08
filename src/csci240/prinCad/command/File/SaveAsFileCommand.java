@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import csci240.prinCad.command.CommandHandler;
-import csci240.prinCad.ui.Log;
-import csci240.prinCad.ui.PrinCanvas;
+import csci240.prinCad.command.CanvasCommandInterface;
+import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
@@ -20,7 +20,7 @@ import javafx.stage.Window;
 public class SaveAsFileCommand extends CommandHandler {
 
 	// constructor
-	public SaveAsFileCommand(PrinCanvas canvas) {
+	public SaveAsFileCommand(CanvasCommandInterface canvas) {
 		super(canvas);
 	}
 	
@@ -40,12 +40,11 @@ public class SaveAsFileCommand extends CommandHandler {
 			fileChooser.setInitialFileName("image.psav");
 			File file = fileChooser.showSaveDialog(stage);
 			if(file.exists()) { // model already exists
-				File dest;
-				do{ // create a proxy ending in ".bak"
-					dest = new File(file.getAbsolutePath() + ".bak");
-				}while(dest.exists());
-				// rename existing to this
-				file.renameTo(dest);
+				File dest = new File(file.getAbsolutePath() + ".bak");;
+				while(dest.exists()){
+					dest = new File(dest.getAbsolutePath() + ".bak");
+				}
+				file.renameTo(dest); // rename existing to this
 			}
 			FileWriter fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
