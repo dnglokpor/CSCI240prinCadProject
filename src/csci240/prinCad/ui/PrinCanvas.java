@@ -100,23 +100,12 @@ public class PrinCanvas extends Canvas implements CanvasToolInterface, CanvasCom
 		this.reset(); // reset to selection
 	}
 	
-	/**
-	 * draw all graphic tokens existing 
-	 */
 	@Override
 	public void draw() {
 		_gc.fillRect(0,  0,  getWidth(),  getHeight());
 		_gc.setStroke(Color.ORANGERED);
 		_gc.setLineWidth(0);
 		_model.draw(_gc); // draw all
-	}
-	
-	/**
-	 * persist the current image of the canvas to a file
-	 */
-	@Override
-	public void saveToFile(PrintWriter out) {
-		_model.save(out);
 	}
 	
 	/**
@@ -128,30 +117,9 @@ public class PrinCanvas extends Canvas implements CanvasToolInterface, CanvasCom
 		_model.load(reader);
 		draw();
 	}
-	
-	/**
-	 * clears the model to start over.
-	 */
+
 	@Override
-	public void freshStart() {
-		_model.clear();
-		draw();
-	}
-	
-	/**
-	 * record an opened file.
-	 * @param of
-	 */
-	@Override
-	public void recordOpenedFile(File of) {
-		_model.setModelFile(of);
-	}
-	
-	/**
-	 * @return the File pointer to an existing opened file.
-	 */
-	@Override
-	public File getOpenedModel() {
-		return _model.getModelFile();
+	public ModelManager getModel() {
+		return this._model;
 	}
 }

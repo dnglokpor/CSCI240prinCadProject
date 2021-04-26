@@ -68,4 +68,52 @@ public class PolyItem extends CadItem {
 		// System.out.println("record " + record); // DEBUG
 		return record;
 	}
+
+	@Override
+	public CadBox getRectangle() {
+		double minX , minY, maxX, maxY;
+		minX = maxX = _lines.get(0); // init both min and max x coord as first x in array
+		minY = maxY = _lines.get(1); // init both min and max y coord as first y in array
+		for(int i = 2; i < _lines.size(); i+=2) {
+			minX = Math.min(minX, _lines.get(i));
+			minY = Math.min(minY, _lines.get(i + 1));
+			maxX = Math.max(maxX, _lines.get(i));
+			maxY = Math.max(maxY, _lines.get(i + 1));
+		}
+		
+		return new CadBox(minX, minY, maxX, maxY);
+	}
+
+	@Override
+	public boolean intersects(CadLine line) {
+		int i = 0;
+		boolean intersects = false;
+		// goes through an check intersection for each
+		// line segment
+		while(i < _lines.size() - 2 && !intersects) {
+			LineItem segment = new LineItem(_lines.get(i), _lines.get(i+1),
+					_lines.get(i+2), _lines.get(i+3));
+			intersects = segment.intersects(line); // stops at first intersection
+			if(!intersects) // else checks next
+				i += 2;
+		}
+		return intersects;
+	}
+
+	@Override
+	public boolean inRangeOf(CadPoint point) {
+		int i = 0;
+		boolean inRange = false;
+		// goes through an check for each line segment for one
+		// in range
+		while(i < _lines.size() - 2 && !inRange) {
+			LineItem segment = new LineItem(_lines.get(i), _lines.get(i+1),
+				_lines.get(i+2), _lines.get(i+3));
+			inRange = segment.inRangeOf(point); // stops at first intersection
+			if(!inRange) // else checks next
+				i += 2;
+		}
+		
+		return inRange;
+	}
 }

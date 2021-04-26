@@ -15,7 +15,7 @@ public abstract class CadTool {
 	// Mouse movement properties
 	boolean _activeMouse;
 	double _xPivot, _yPivot, _xEnd, _yEnd;
-	
+	protected static final double _markerSize = 5; // markers 
 	/** constructor:
 	 * using default
 	 */

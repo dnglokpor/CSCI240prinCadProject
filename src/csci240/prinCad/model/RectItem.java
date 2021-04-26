@@ -54,4 +54,37 @@ public class RectItem extends CadItem {
 	public String save() {
 		return String.format("%1$f %2$f %3$f %4$f", _xPivot, _yPivot, _width, _height);
 	}
+
+	@Override
+	public CadBox getRectangle() {
+		return new CadBox(_xPivot, _yPivot, _xPivot + _width, _yPivot + _height);
+	}
+
+	@Override
+	public boolean intersects(CadLine line) {
+		// respectively top, left, right and bottom sides of the box.
+		LineItem top = new LineItem(_xPivot, _yPivot, _xPivot + _width, _yPivot);
+		LineItem left = new LineItem(_xPivot, _yPivot, _xPivot, _yPivot + _height);
+		LineItem right = new LineItem(_xPivot + _width, _yPivot, _xPivot + _width, _yPivot + _height);
+		LineItem bottom = new LineItem(_xPivot, _yPivot + _height, _xPivot + _width, _yPivot + _height);
+		
+		// checks if any of the side segments intersect the line
+		// in which case returns true.
+		return top.intersects(line) || left.intersects(line) ||
+				right.intersects(line) || bottom.intersects(line);
+	}
+
+	@Override
+	public boolean inRangeOf(CadPoint point) {
+		// respectively top, left, right and bottom sides of the box.
+				LineItem top = new LineItem(_xPivot, _yPivot, _xPivot + _width, _yPivot);
+				LineItem left = new LineItem(_xPivot, _yPivot, _xPivot, _yPivot + _height);
+				LineItem right = new LineItem(_xPivot + _width, _yPivot, _xPivot + _width, _yPivot + _height);
+				LineItem bottom = new LineItem(_xPivot, _yPivot + _height, _xPivot + _width, _yPivot + _height);
+				
+				// checks if any of the side segments intersect the line
+				// in which case returns true.
+				return top.inRangeOf(point) || left.inRangeOf(point) ||
+						right.inRangeOf(point) || bottom.inRangeOf(point);
+	}
 }

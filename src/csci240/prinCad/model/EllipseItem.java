@@ -58,4 +58,36 @@ public class EllipseItem extends CadItem {
 	public String save() {
 		return String.format("%1$f %2$f %3$f %4$f", _xCenter, _yCenter, _hRadius, _vRadius);
 	}
+
+	@Override
+	public CadBox getRectangle() {
+		return new CadBox(_xCenter -  _hRadius, _yCenter - _vRadius, 
+				_xCenter +  _hRadius, _yCenter + _vRadius);
+	}
+
+	@Override
+	public boolean intersects(CadLine line) {
+		// respectively top, left, right and bottom sides of the box.
+		LineItem top = new LineItem(_xCenter - _hRadius, _yCenter - _vRadius, _xCenter + _hRadius, _yCenter - _vRadius);
+		LineItem left = new LineItem(_xCenter - _hRadius, _yCenter - _vRadius, _xCenter -  _hRadius, _yCenter + _vRadius);
+		LineItem right = new LineItem(_xCenter + _hRadius, _yCenter - _vRadius, _xCenter +  _hRadius, _yCenter + _vRadius);
+		LineItem bottom = new LineItem(_xCenter - _hRadius, _yCenter + _vRadius, _xCenter + _hRadius, _yCenter + _vRadius);
+		
+		// checks if any of the side segments intersect the line
+		// in which case returns true.
+		return top.intersects(line) || left.intersects(line) ||
+			right.intersects(line) || bottom.intersects(line);
+	}
+
+	@Override
+	public boolean inRangeOf(CadPoint point) {
+		boolean inRange = false;
+		// using ellipse equation
+		// (x-x0)^2/rH^2 + (y-y)^2/rV^2 = 1
+		double op1 = sqr(point.xCoord - _xCenter)/sqr(_hRadius),
+				op2 = sqr(point.yCoord - _yCenter)/sqr(_vRadius);
+		if(round(op1 + op2) == 1)
+			inRange = true;
+		return inRange;
+	}
 }

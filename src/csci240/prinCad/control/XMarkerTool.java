@@ -26,23 +26,14 @@ public class XMarkerTool extends MarkerTool {
 		_x = me.getX();
 		_y = me.getY();
 		//draw x
-		crossAt(_canvas.getGraphicsContext(), _x, _y);
+		double leftX = _x - _markerSize;
+		double topY = _y - _markerSize;
+		double bottomY = _y + _markerSize;
+		double rightX = _x + _markerSize;
+		_canvas.getGraphicsContext().strokeLine(leftX, topY, rightX, bottomY);
+		_canvas.getGraphicsContext().strokeLine(rightX, topY, leftX, bottomY);
 		// create x token
-		_drawn = new XItem(_x, _y);
-	}
-	
-	/**
-	 * draw a small x shaped marker at (x,y).
-	 * @param x
-	 * @param y
-	 */
-	public static void crossAt(GraphicsContext gc ,double x, double y) {
-		double leftX = x - _markerSize;
-		double topY = y - _markerSize;
-		double bottomY = y + _markerSize;
-		double rightX = x + _markerSize;
-		gc.strokeLine(leftX, topY, rightX, bottomY);
-		gc.strokeLine(rightX, topY, leftX, bottomY);
+		_drawn = new XItem(_x, _y, _markerSize);
 	}
 
 }

@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
  */
 public abstract class MarkerTool extends CadTool {
 	// shared attribute
-	protected static final double _markerSize = 10;
 	double _x;
 	double _y;
 	protected CadItem _drawn;

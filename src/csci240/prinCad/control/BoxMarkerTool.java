@@ -20,17 +20,9 @@ public class BoxMarkerTool extends MarkerTool {
 		_x = me.getX();
 		_y = me.getY();
 		// draw box
-		boxAt(_canvas.getGraphicsContext(), _x, _y);
+		double sideLength = 2 * _markerSize; // double the size for boxes
+		_canvas.getGraphicsContext().strokeRect(_x - _markerSize, _y - _markerSize, sideLength, sideLength);
 		// create box token
-		_drawn = new BoxItem(_x, _y);
-	}
-	
-	/**
-	 * draw a small box shaped marker at (x,y).
-	 * @param x
-	 * @param y
-	 */
-	public static void boxAt(GraphicsContext gc ,double x, double y) {
-		gc.strokeRect(x, y, 3 * _markerSize, 3 * _markerSize);
+		_drawn = new BoxItem(_x, _y, _markerSize);
 	}
 }

@@ -32,7 +32,7 @@ public class SaveAsFileCommand extends CommandHandler {
 			
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Save as");
-			File old = getCanvas().getOpenedModel();
+			File old = getCanvas().getModel().getModelFile();
 			if(old != null) {// if a model file if known
 				fileChooser.setInitialDirectory(old.getParentFile());
 			}
@@ -49,9 +49,9 @@ public class SaveAsFileCommand extends CommandHandler {
 			FileWriter fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter out = new PrintWriter(bw, true);
-			getCanvas().saveToFile(out);
+			getCanvas().getModel().save(out);
 			// record save file
-			getCanvas().recordOpenedFile(file);
+			getCanvas().getModel().setModelFile(file);
 			out.flush();
 			out.close();
 			Log.info("saved canvas image as " + file.getName());

@@ -16,6 +16,7 @@ public class NewFileCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		Log.info("start new canvas image");
-		getCanvas().freshStart();
+		getCanvas().getModel().clear();
+		getCanvas().draw();
 	}
 }

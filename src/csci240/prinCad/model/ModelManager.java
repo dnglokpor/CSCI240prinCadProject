@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import csci240.prinCad.util.Log;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /** ModelManager class:
  * class that encapsulate all our CadItems. This allows to quickly manage an image of
@@ -30,6 +31,13 @@ public class ModelManager {
 	 */
 	public File getModelFile() {
 		return _modelFile;
+	}
+	
+	/**
+	 * @return true if _modelFile is not null.
+	 */
+	public boolean hasModelFile() {
+		return _modelFile != null;
 	}
 	
 	/**
@@ -58,12 +66,56 @@ public class ModelManager {
 	}
 	
 	/**
-	 * adds a new item to our ArrayList.
-	 * @param item the new CadItem to add.
+	 * toggles the value of the _isSelected property of this CadItem if inside the
+	 * selection.
+	 * @param boxSelect the CadBox of the current selection.
+	 */
+	public void select(CadBox boxSelect) {
+		for(CadItem item : _items) {
+			item.select(boxSelect);
+		}
+	}
+	
+	/**
+	 * toggles the value of the _isSelected property of this CadItem if inside the
+	 * selection.
+	 * @param lineSelect the CadLine of the current selection.
+	 */
+	public void select(CadLine lineSelect) {
+		for(CadItem item : _items) {
+			item.select(lineSelect);
+		}
+	}
+	
+	/**
+	 * toggles the value of the _isSelected property of this CadItem if inside the
+	 * selection.
+	 * @param pointSelect the CadPoint of the current selection.
+	 */
+	public void select(CadPoint pointSelect) {
+		for(CadItem item : _items) {
+			item.select(pointSelect);
+		}
+	}
+	
+	/**
+	 * removes from the ArrayList of items any item that is currently selected
+	 */
+	public void delete() {
+		_items.removeIf(item -> item._isSelected);
+	}
+	
+	/**
+	 * sets the drawing color and line width of the gc and draw the whole ArrayList
+	 * of items.
+	 * @param gc the GraphicsContext instance we are to draw on.
 	 */
 	public void draw(GraphicsContext gc) {
+		gc.setStroke(Color.ORANGERED);
+		gc.setLineWidth(0);
+		
 		for(CadItem item: _items) {
-			item.draw(gc);
+			item.draw(gc, Color.ORANGERED, Color.BLUEVIOLET);
 		}
 	}
 	

@@ -30,14 +30,14 @@ public class SaveFileCommand extends CommandHandler {
 	@Override
 	public void action(ActionEvent e) {
 		try {
-			if(getCanvas().getOpenedModel() != null) {
+			if(getCanvas().getModel().hasModelFile()) {
 				// model file exists
-				File file = getCanvas().getOpenedModel();
+				File file = getCanvas().getModel().getModelFile();
 				FileWriter fw = new FileWriter(file);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter out = new PrintWriter(bw, true);
 				
-				getCanvas().saveToFile(out);
+				getCanvas().getModel().save(out);
 				out.flush();
 				out.close();
 				Log.info("saved canvas image to " + file.getName());

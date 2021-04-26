@@ -26,7 +26,7 @@ public class OpenFileCommand extends CommandHandler {
 			
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Load Model");
-			File old = getCanvas().getOpenedModel();
+			File old = getCanvas().getModel().getModelFile();
 			if(old != null) {// if a model file if known
 				fileChooser.setInitialDirectory(old.getParentFile());
 			}
@@ -38,7 +38,7 @@ public class OpenFileCommand extends CommandHandler {
 				// load data
 				getCanvas().loadFromFile(reader);
 				// record save file
-				getCanvas().recordOpenedFile(file);
+				getCanvas().getModel().setModelFile(file);
 				reader.close();
 				fr.close();
 				Log.info("loaded canvas image from: " + file.getName());

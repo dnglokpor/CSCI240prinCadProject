@@ -25,20 +25,9 @@ public class PlusMarkerTool extends MarkerTool {
 		_x = me.getX();
 		_y = me.getY();
 		// draw plus
-		plusAt(_canvas.getGraphicsContext(), _x, _y);
+		_canvas.getGraphicsContext().strokeLine(_x - _markerSize, _y, _x + _markerSize, _y);
+		_canvas.getGraphicsContext().strokeLine(_x, _y - _markerSize, _x, _y + _markerSize);
 		// create plus token
-		_drawn = new PlusItem(_x, _y);
+		_drawn = new PlusItem(_x, _y, _markerSize);
 	}
-	
-	/**
-	 * draw a small plus shaped marker at (x,y).
-	 * @param x
-	 * @param y
-	 */
-	public static void plusAt(GraphicsContext gc ,double x, double y) {
-		double size = 2 * _markerSize;
-		gc.strokeLine(x - size, y, x + size, y);
-		gc.strokeLine(x, y - size, x, y + size);
-	}
-
 }
