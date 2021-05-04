@@ -5,6 +5,10 @@ import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.util.Log;
 import javafx.event.ActionEvent;
 
+/**RedoEditCommand class:
+ * handle the action of the Redo option under the Edit menu.
+ * @author dnglokpor
+ */
 public class RedoEditCommand extends CommandHandler {
 
 	// constructor
@@ -15,6 +19,8 @@ public class RedoEditCommand extends CommandHandler {
 	// handle action event
 	@Override
 	public void action(ActionEvent e) {
-		Log.info("Handle Redo Edit Event");
+		Log.info("Undid stuff");
+		getCanvas().getModel().redo();
+		getCanvas().draw();
 	}
 }

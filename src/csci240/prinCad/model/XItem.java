@@ -35,4 +35,9 @@ public class XItem extends MarkerItem {
 		LineItem secDiag = new LineItem(_x - _size, _y + _size, _x + _size, _y - _size);
 		return firstDiag.intersects(line) || secDiag.intersects(line);
 	}
+
+	@Override
+	public XItem clone() {
+		return new XItem(_x, _y, _size);
+	}
 }

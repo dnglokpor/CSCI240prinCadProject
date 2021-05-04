@@ -101,6 +101,12 @@ public abstract class CadItem {
 		return val - floor < 0.5D ? floor : floor + 1; 
 	}
 	
+	/**
+	 * @return an exact copy of this item.
+	 */
+	@Override
+	public abstract CadItem clone();
+	
 	/** helper:
 	 * return the square of a number.
 	 * @param x

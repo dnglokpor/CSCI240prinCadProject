@@ -24,6 +24,7 @@ class TextGuiSettings implements Settings{
 	private int canvasHeight;
 	private String canvasColor;
 	private String verbosity;
+	private int numStates;
 	
 	/** default constructor:
 	 * initialize all the attributes with the default values from the Settings
@@ -32,11 +33,13 @@ class TextGuiSettings implements Settings{
 	public TextGuiSettings() {
 		// default all attributes
 		this.sceneWidth = Integer.parseInt(DEFAULTS[0]);
-		this.sceneHeight = Integer.parseInt(DEFAULTS[1]);;
+		this.sceneHeight = Integer.parseInt(DEFAULTS[1]);
 		this.sceneColor = DEFAULTS[2];
-		this.canvasWidth = Integer.parseInt(DEFAULTS[3]);;
-		this.canvasHeight = Integer.parseInt(DEFAULTS[4]);;
+		this.canvasWidth = Integer.parseInt(DEFAULTS[3]);
+		this.canvasHeight = Integer.parseInt(DEFAULTS[4]);
 		this.canvasColor = DEFAULTS[5];
+		this.verbosity = DEFAULTS[6];
+		this.numStates = Integer.parseInt(DEFAULTS[7]);
 	}
 	
 	// getters
@@ -185,13 +188,16 @@ class TextGuiSettings implements Settings{
 							case "Verbosity":
 								readValues.verbosity = read[1];
 								break;
+							case "NumStates": 
+								readValues.numStates = Integer.parseInt(read[1]);
+								break;
 							default:
 								break;
 						}
 					}
 					valid = true; // mark that settings import was completed
 				}catch(Exception ex) { // any exception
-					System.out.println("Exception encounterd: " + ex);
+					System.out.println("Exception encountered: " + ex);
 					System.out.println("Generating new settings.");
 				}
 			}
@@ -253,5 +259,10 @@ class TextGuiSettings implements Settings{
 	@Override
 	public void setSceneHeight(double newVal) {
 		this.sceneHeight = (int) newVal;
+	}
+
+	@Override
+	public int getUndoSize() {
+		return this.numStates;
 	}
 }

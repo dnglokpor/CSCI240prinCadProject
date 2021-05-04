@@ -116,4 +116,11 @@ public class PolyItem extends CadItem {
 		
 		return inRange;
 	}
+
+	@Override
+	public PolyItem clone() {
+		ArrayList<Double> newLines = new ArrayList<Double>();
+		_lines.forEach((i) -> newLines.add(i));
+		return new PolyItem(newLines); 
+	}
 }

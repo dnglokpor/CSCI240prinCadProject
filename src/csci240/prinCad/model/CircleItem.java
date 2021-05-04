@@ -95,4 +95,9 @@ public class CircleItem extends CadItem {
 		return  minDist <= radius && radius <= maxDist;
 	}
 
+	@Override
+	public CircleItem clone() {
+		return new CircleItem(_xCenter, _yCenter, _radius);
+	}
+
 }

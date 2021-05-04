@@ -1,8 +1,6 @@
 package csci240.prinCad.command;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.PrintWriter;
 
 import csci240.prinCad.control.CadTool;
 import csci240.prinCad.model.ModelManager;

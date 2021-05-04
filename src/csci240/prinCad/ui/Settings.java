@@ -22,7 +22,8 @@ interface Settings {
 		"CanvasWidth", 	// [3]
 		"CanvasHeight",	// [4]
 		"CanvasColor",  // [5]
-		"Verbosity"		// [6]
+		"Verbosity",	// [6]
+		"NumStates"	    // [7]
 	};
 	String[] DEFAULTS = new String[] {
 		"900", 			// [0]
@@ -31,7 +32,8 @@ interface Settings {
 		"700",			// [3]
 		"550",			// [4]
 		"black",		// [5]
-		"Information"	// [6]
+		"Information",	// [6]
+		"6"				// [7]
 	};
 	
 	// color presets
@@ -56,6 +58,10 @@ interface Settings {
 	Color getSceneColor();
 	Color getCanvasColor();
 	LoggingLevel getLoggingLevel();
+	/**
+	 * @return the undo size specified in the settings file
+	 */
+	int getUndoSize();
 	
 	/**
 	 * must be used to read settings from the predefined settings file

@@ -37,4 +37,9 @@ public class BoxItem extends MarkerItem {
 		return top.intersects(line) || left.intersects(line) ||
 				right.intersects(line) || bottom.intersects(line);
 	}
+
+	@Override
+	public BoxItem clone() {
+		return new BoxItem(_x, _y, _size);
+	}
 }

@@ -132,4 +132,9 @@ public class LineItem extends CadItem {
 			end = Math.max(_yPivot, _yEnd) + offset;
 		return pivot <= val && val <= end;
 	}
+
+	@Override
+	public LineItem clone() {
+		return new LineItem(_xPivot, _yPivot, _xEnd, _yEnd);
+	}
 }

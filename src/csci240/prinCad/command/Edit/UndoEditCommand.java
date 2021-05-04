@@ -20,6 +20,8 @@ public class UndoEditCommand extends CommandHandler {
 	// handle action event
 	@Override
 	public void action(ActionEvent e) {
-		Log.info("Handle Undo Edit Event");
+		Log.info("Undid stuff");
+		getCanvas().getModel().undo();
+		getCanvas().draw();
 	}
 }

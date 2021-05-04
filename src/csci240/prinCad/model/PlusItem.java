@@ -32,4 +32,9 @@ public class PlusItem extends MarkerItem {
 		LineItem horizontal = new LineItem(_x - _size, _y, _x + _size, _y);
 		return vertical.intersects(line) || horizontal.intersects(line);
 	}
+
+	@Override
+	public PlusItem clone() {
+		return new PlusItem(_x, _y, _size);
+	}
 }

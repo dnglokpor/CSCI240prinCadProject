@@ -33,7 +33,9 @@ class PropGuiSettings implements Settings{
 	}
 	
 	// getters
-	public int getSceneWidth() { return Integer.parseInt(this.guiSettings.getProperty(LABELS[0])); }
+	public int getSceneWidth() { 
+		return Integer.parseInt(this.guiSettings.getProperty(LABELS[0]));
+	}
 	
 	public int getSceneHeight() { return Integer.parseInt(this.guiSettings.getProperty(LABELS[1])); }
 	
@@ -163,5 +165,10 @@ class PropGuiSettings implements Settings{
 	@Override
 	public void setSceneHeight(double newVal) {
 		guiSettings.setProperty(LABELS[1], String.valueOf((int) newVal));
+	}
+
+	@Override
+	public int getUndoSize() {
+		return Integer.parseInt(this.guiSettings.getProperty(LABELS[7])); 
 	}
 }

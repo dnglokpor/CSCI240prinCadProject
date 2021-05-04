@@ -1,18 +1,19 @@
 package csci240.prinCad.ui;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.PrintWriter;
 
 import csci240.prinCad.command.CanvasCommandInterface;
 import csci240.prinCad.control.BoxSelectionTool;
 import csci240.prinCad.control.CadTool;
 import csci240.prinCad.control.CanvasToolInterface;
+import csci240.prinCad.control.KeyBoardControlTool;
 import csci240.prinCad.control.LineSelectionTool;
 import csci240.prinCad.model.CadItem;
 import csci240.prinCad.model.ModelManager;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 /** PrinCanvas Object:
@@ -24,6 +25,7 @@ public class PrinCanvas extends Canvas implements CanvasToolInterface, CanvasCom
 	private GraphicsContext _gc;
 	private CadTool _selectionTool; // for selection purposes
 	private CadTool _activeTool; // may not be a selection tool
+	private KeyBoardControlTool _keyResponseTool; // respond to keyboard input
 	private ModelManager _model; // for managing graphic tokens
 
 	/** constructor:
@@ -42,15 +44,16 @@ public class PrinCanvas extends Canvas implements CanvasToolInterface, CanvasCom
 		// Subscribe to mouse events
 		setOnMousePressed(e -> _activeTool.onMousePressed(e, this));
 		setOnMouseDragged(e -> _activeTool.onMouseDrag(e, this));
-		setOnMouseMoved(e -> _activeTool.onMouseMove(e, this)); // Poly
+		setOnMouseMoved(e -> _activeTool.onMouseMove(e, this));
 		setOnMouseReleased(e -> _activeTool.onMouseRelease(e, this));
 		
-		// set selection type by default
+		// instantiate all handlers
 		this._selectionTool = new BoxSelectionTool();
 		this._activeTool = this._selectionTool; // specify that selection is currently working
+		this._keyResponseTool = new KeyBoardControlTool();
 		
 		// create model manager
-		_model = new ModelManager();
+		_model = new ModelManager(cadSettings.getUndoSize());
 	}
 	
 	// getters
@@ -121,5 +124,17 @@ public class PrinCanvas extends Canvas implements CanvasToolInterface, CanvasCom
 	@Override
 	public ModelManager getModel() {
 		return this._model;
+	}
+	
+	/**
+	 * handle Keyboard input events. is set to only defer to response method
+	 * when the Control key is down and another key is also down.
+	 * @param ke the KeyEvent triggered
+	 */
+	public void react(KeyEvent ke) {
+		if(ke.isControlDown() && ke.getCode() != KeyCode.CONTROL) { 
+			// only responds when control is down
+			_keyResponseTool.react(ke, this);
+		}
 	}
 }

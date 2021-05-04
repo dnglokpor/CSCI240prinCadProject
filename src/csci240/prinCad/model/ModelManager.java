@@ -16,14 +16,17 @@ import javafx.scene.paint.Color;
  */
 public class ModelManager {
 	// attributes
-	private ArrayList<CadItem> _items;
+	// private ArrayList<CadItem> _items;
+	private State _items;
 	private File _modelFile = null; // save file
+	private final int _undoSize;
 	
 	/** constructor:
 	 * builds the arraylist to store the items.
 	 */
-	public ModelManager() {
-		_items = new ArrayList<CadItem>();
+	public ModelManager(int undoSize) {
+		_undoSize = undoSize;
+		_items = new State(_undoSize);
 	}
 	
 	/**
@@ -58,7 +61,7 @@ public class ModelManager {
 	
 	/**
 	 * erases the whole current canvas image.
-	 * @param item the new CadItem to add.
+	 *
 	 */
 	public void clear() {
 		_items.clear();
@@ -71,7 +74,7 @@ public class ModelManager {
 	 * @param boxSelect the CadBox of the current selection.
 	 */
 	public void select(CadBox boxSelect) {
-		for(CadItem item : _items) {
+		for(CadItem item : _items.getState()) {
 			item.select(boxSelect);
 		}
 	}
@@ -82,7 +85,7 @@ public class ModelManager {
 	 * @param lineSelect the CadLine of the current selection.
 	 */
 	public void select(CadLine lineSelect) {
-		for(CadItem item : _items) {
+		for(CadItem item : _items.getState()) {
 			item.select(lineSelect);
 		}
 	}
@@ -93,7 +96,7 @@ public class ModelManager {
 	 * @param pointSelect the CadPoint of the current selection.
 	 */
 	public void select(CadPoint pointSelect) {
-		for(CadItem item : _items) {
+		for(CadItem item : _items.getState()) {
 			item.select(pointSelect);
 		}
 	}
@@ -102,7 +105,21 @@ public class ModelManager {
 	 * removes from the ArrayList of items any item that is currently selected
 	 */
 	public void delete() {
-		_items.removeIf(item -> item._isSelected);
+		_items.delete();
+	}
+	
+	/**
+	 * loads a previous state if there is.
+	 */
+	public void undo() {
+		_items.trackPrev();
+	}
+	
+	/**
+	 * loads a next state if there is.
+	 */
+	public void redo() {
+		_items.redo();
 	}
 	
 	/**
@@ -114,7 +131,7 @@ public class ModelManager {
 		gc.setStroke(Color.ORANGERED);
 		gc.setLineWidth(0);
 		
-		for(CadItem item: _items) {
+		for(CadItem item: _items.getState()) {
 			item.draw(gc, Color.ORANGERED, Color.BLUEVIOLET);
 		}
 	}
@@ -124,7 +141,7 @@ public class ModelManager {
 	 * @param out the fileOutputStream to write to. 
 	 */
 	public void save(PrintWriter out) {
-		for(CadItem item : _items) {
+		for(CadItem item : _items.getState()) {
 			Class<? extends CadItem> cl = item.getClass(); // get the isa object
 			String className = cl.getName();
 			
@@ -138,6 +155,7 @@ public class ModelManager {
 	 * @param reader
 	 */
 	public void load(BufferedReader reader) {
+		ArrayList<CadItem> loaded = new ArrayList<CadItem>();
 		try {
 			String line = reader.readLine(); // read first line
 			int lineNo = 1; // for debug purposes
@@ -178,7 +196,8 @@ public class ModelManager {
 						throw new Exception("Failed to parse line " + lineNo + ": " + line);
 				}
 				if(cadItem != null) { // save loaded object to runtime image if it exist
-					_items.add(cadItem);
+					//_items.add(cadItem);
+					loaded.add(cadItem);
 				}
 				
 				lineNo++;
@@ -187,5 +206,7 @@ public class ModelManager {
 		}catch(Exception ex) {
 			Log.error("Failed to load file. Exception: ", ex);
 		}
+		// load into state
+		_items = new State(_undoSize, loaded);
 	}
 }

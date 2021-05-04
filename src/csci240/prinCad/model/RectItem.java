@@ -87,4 +87,9 @@ public class RectItem extends CadItem {
 				return top.inRangeOf(point) || left.inRangeOf(point) ||
 						right.inRangeOf(point) || bottom.inRangeOf(point);
 	}
+
+	@Override
+	public RectItem clone() {
+		return new RectItem(_xPivot, _yPivot, _width, _height);
+	}
 }

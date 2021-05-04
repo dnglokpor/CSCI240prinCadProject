@@ -17,6 +17,13 @@ public class EllipseItem extends CadItem {
 	public final double _vDiameter;
 	public final double _hDiameter;
 	
+	/**constructor:
+	 * requires the following:
+	 * @param xCenter center point x-coordinate
+	 * @param yCenter center point y-coordinate
+	 * @param hRad horizontal radius
+	 * @param vRad vertical radius
+	 */
 	public EllipseItem(double xCenter, double yCenter, double hRad, double vRad) {
 		_xCenter = xCenter;
 		_yCenter = yCenter;
@@ -89,5 +96,10 @@ public class EllipseItem extends CadItem {
 		if(round(op1 + op2) == 1)
 			inRange = true;
 		return inRange;
+	}
+
+	@Override
+	public EllipseItem clone() {
+		return new EllipseItem(_xCenter, _yCenter, _hRadius, _vRadius);
 	}
 }

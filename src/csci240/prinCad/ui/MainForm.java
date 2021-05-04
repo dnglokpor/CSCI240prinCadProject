@@ -3,7 +3,6 @@ package csci240.prinCad.ui;
 import java.lang.Exception;
 
 import javafx.application.Application;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Node;
@@ -64,15 +63,6 @@ public class MainForm extends Application{
 		primaryStage.setMaxHeight(
 				Screen.getScreens().get(0).getBounds().getWidth()); // max width
 		
-		/** ATTEMPT AT SCREEN RESIZE
-		// Subscribe window events
-		// help from https://stackoverflow.com/questions/38216268/how-to-listen-resize-event-stage-in-javafx
-		primaryStage.widthProperty().addListener((obs, oldVal, newVal) -> 
-			onWidthResize((ObservableValue) obs, (Double)newVal)); // listener on width
-		primaryStage.heightProperty().addListener((obs, oldVal, newVal) -> 
-			onHeightResize((ObservableValue) obs, (Double)newVal)); // listener on height
-		*/
-		
 		// create canvas
 		_primaryCanvas = new PrinCanvas(cadSettings);
 		
@@ -119,6 +109,7 @@ public class MainForm extends Application{
 		// scene
 		_primaryScene = new Scene(_primaryPane, cadSettings.getSceneWidth(), 
 				cadSettings.getSceneHeight(), cadSettings.getSceneColor());
+		_primaryScene.setOnKeyPressed(ke -> _primaryCanvas.react(ke));
 		
 		// Apply application styles
 		File file = new File("AppStyles.css");
@@ -134,50 +125,6 @@ public class MainForm extends Application{
 		primaryStage.setTitle("CSCI 240 PrinCad Project");
 		primaryStage.show();
 	}
-	
-	/**
-	 * adapts the Canvas and the Scene width to the screen width.
-	 * @param primaryStage the main stage (window) of the application.
-	 * @param newSize the new size of the main stage.
-	 */
-	public void onWidthResize(ObservableValue<Stage> primaryStage, double newSize) {
-		System.out.println("stage: " + primaryStage); // DEBUG
-		System.out.println("newVal: " + newSize); // DEBUG
-		// get Scene to Canvas width difference
-		int deltaW = Integer.parseInt(Settings.DEFAULTS[0]) - 
-				Integer.parseInt(Settings.DEFAULTS[3]);
-		System.out.println("deltaW: " + deltaW); // DEBUG
-		int canvasW = (int) Math.abs(newSize - deltaW);
-		System.out.println("canvasW: " + canvasW); // DEBUG
-		System.out.println("sceneW: " + _primaryScene.getWidth()); // DEBUG
-		// change canvas size
-		_primaryCanvas.setWidth(canvasW);
-		// save changes for next launch
-		cadSettings.setSceneWidth(newSize - 5);
-		cadSettings.setCanvasWidth(canvasW);
-	};
-	
-	/**
-	 * adapts the Canvas and the Scene height to the screen height.
-	 * @param primaryStage the main stage (window) of the application.
-	 * @param newSize the new size of the main stage.
-	 */
-	public void onHeightResize(ObservableValue<Stage> primaryStage, double newSize) {
-		System.out.println("stage: " + primaryStage); // DEBUG
-		System.out.println("newVal: " + newSize); // DEBUG
-		// get Scene to Canvas width difference
-		int deltaH = Integer.parseInt(Settings.DEFAULTS[1]) - 
-			Integer.parseInt(Settings.DEFAULTS[4]);
-		System.out.println("deltaH: " + deltaH); // DEBUG
-		int canvasH = (int) Math.abs(newSize - deltaH);
-		System.out.println("canvasH: " + canvasH); // DEBUG
-		System.out.println("sceneH: " + _primaryScene.getHeight()); // DEBUG
-		// change canvas size
-		_primaryCanvas.setHeight(canvasH);
-		// save changes for next launch
-		cadSettings.setSceneHeight(newSize - 5);
-		cadSettings.setCanvasHeight(canvasH);
-	};
 	
 	// java main entry point
 	public static void main(String[] args) throws Exception{
